@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h4>Test</h4>
+
+    <script type="text/javascript" src="assets/js/dependencies/sails.io.js"></script>
+    <script type="text/javascript">
+        io.sails.url = "http://localhost:1337";
+
+        console.log("Está conectado: ", io.socket.isConnected());
+        /*
+        io.socket.get("http://localhost:1337/user", { msm: "ok" }, function (resData, jwres) {
+            //console.log("resData: ",resData);
+            console.log("jwres: ", jwres);
+            console.log("algo ha de salir.");
+        });
+        */
+        io.socket.on('connect', function onConnect() {
+            console.log('This socket is now connected to the Sails server.');
+        });
+        // user_logged_in
+        io.socket.on('user_logged_in', function (data) {
+            console.log("lo que llega es: ", data);
+            // console.log(data);
+        });
+
+        io.socket.on('message', function (data) {
+            console.log(data.greeting);
+        });
+    </script>
+
+</body>
+
+</html>
